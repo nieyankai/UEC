@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">网关屏</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">环境监测</string>
+    <string name="title_notifications">报警管理</string>
+    <string name="title_config">系统管理</string>
+
+</resources>

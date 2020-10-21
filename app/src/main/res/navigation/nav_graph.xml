@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.uec_app.ui.dashboard.DashboardFragment"
+        android:label="环境监测"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.uec_app.ui.notifications.NotificationsFragment"
+        android:label="报警"
+        tools:layout="@layout/fragment_notifications" />
+    <navigation android:id="@+id/navigation_home"
+        app:startDestination="@id/navigation_data_list">
+        <fragment
+            android:id="@+id/navigation_data_list"
+            android:name="com.example.uec_app.ui.home.HomeFragment"
+            android:label="数列列表"
+            tools:layout="@layout/fragment_home">
+            <action
+                android:id="@+id/action_navigation_home_to_historyFragment"
+                app:destination="@id/historyFragment" />
+            <argument
+                android:name="dataName"
+                app:argType="string"
+                android:defaultValue='""' />
+        </fragment>
+        <fragment
+            android:id="@+id/historyFragment"
+            android:name="com.example.uec_app.ui.history.HistoryFragment"
+            android:label="历史数据"
+            tools:layout="@layout/fragment_history_data" />
+    </navigation>
+    <navigation android:id="@+id/navigation_config"
+        app:startDestination="@id/navigation_config">
+        <fragment
+            android:id="@+id/navigation_config"
+            android:name="com.example.uec_app.ui.config.ConfigFragment"
+            android:label="fragment_config"
+            tools:layout="@layout/fragment_config_root" >
+            <action
+                android:id="@+id/action_navigation_config_to_regionConfigFragment"
+                app:destination="@id/regionConfigFragment" />
+            <action
+                android:id="@+id/action_navigation_config_to_resConfigFragment"
+                app:destination="@id/resConfigFragment" />
+            <action
+                android:id="@+id/action_navigation_config_to_dssConfigFragment"
+                app:destination="@id/dssConfigFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/regionConfigFragment"
+            android:name="com.example.uec_app.ui.config.region.RegionConfigFragment"
+            android:label="RegionConfigFragment" >
+            <action
+                android:id="@+id/action_regionConfigFragment_to_navigation_config"
+                app:destination="@id/navigation_config" />
+        </fragment>
+        <fragment
+            android:id="@+id/resConfigFragment"
+            android:name="com.example.uec_app.ui.config.resource.ResConfigFragment"
+            android:label="fragment_config_resource"
+            tools:layout="@layout/fragment_config_resource" >
+            <action
+                android:id="@+id/action_resConfigFragment_to_navigation_config"
+                app:destination="@id/navigation_config" />
+        </fragment>
+        <fragment
+            android:id="@+id/dssConfigFragment"
+            android:name="com.example.uec_app.ui.config.dss.DssConfigFragment"
+            android:label="fragment_config_dss"
+            tools:layout="@layout/fragment_config_dss" >
+            <action
+                android:id="@+id/action_dssConfigFragment_to_navigation_config"
+                app:destination="@id/navigation_config" />
+        </fragment>
+    </navigation>
+</navigation>

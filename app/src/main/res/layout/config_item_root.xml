@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@drawable/config_item_border"
+    android:descendantFocusability="afterDescendants"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/config_item_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/config_text_size"
+        android:layout_weight="3"
+        android:text="config item"
+        android:textColor="@color/colorLight"
+        app:autoSizeTextType="uniform" />
+
+    <TextView
+        android:id="@+id/config_item_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/config_text_size"
+        android:paddingHorizontal="@dimen/config_text_padding"
+        android:layout_weight="1"
+        android:background="@drawable/config_button_border"
+        android:text="立即设置"
+        android:textAlignment="center"
+        android:textColor="@color/colorLight"
+        app:autoSizeTextType="uniform" />
+</LinearLayout>

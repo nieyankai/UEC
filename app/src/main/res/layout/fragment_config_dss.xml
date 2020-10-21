@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".ui.config.dss.DssConfigFragment">
+
+    <TextView
+        android:id="@+id/back_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="《返回"
+        android:textColor="@color/colorLight"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_margin="32dp"
+        android:background="@color/colorPrimary"
+        android:text="添加"
+        android:textColor="@color/colorLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="序号"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="数据名称"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="所属区域"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="IP地址"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:id="@+id/group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Group"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:id="@+id/dss"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Dss"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:id="@+id/dss_res"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="资源类型"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+
+            <TextView
+                android:id="@+id/dss_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="创建时间"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4sp"
+                android:layout_marginVertical="8sp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="操作"
+                android:textAlignment="center"
+                android:textColor="@color/colorLight"
+                android:textSize="@dimen/config_region_text_size" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/config_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
+            android:background="@color/colorPrimary"
+            tools:listitem="@layout/config_item_dss" />
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="data_text_size">16sp</dimen>
+    <dimen name="config_text_size">16sp</dimen>
+    <dimen name="config_text_padding">8dp</dimen>
+    <dimen name="config_text_padding_left">32dp</dimen>
+    <dimen name="region_text_size">32sp</dimen>
+    <dimen name="config_region_text_size">16sp</dimen>
+</resources>
