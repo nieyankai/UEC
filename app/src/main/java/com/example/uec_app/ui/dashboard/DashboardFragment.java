@@ -43,30 +43,25 @@ public class DashboardFragment extends Fragment {
     @Inject
     DashboardViewModel dashboardViewModel;
 
-    Timer timer = new Timer();
-
-    TimerTask dataTask = new TimerTask() {
-        @Override
-        public void run() {
-           // dashboardViewModel.refresh();
-        }
-    };
-
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        //获取视图
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
         Spinner resSpinner = root.findViewById(R.id.res_spinner);
-        Spinner regsionSpinner = root.findViewById(R.id.region_spinner);
+        Spinner regionSpinner = root.findViewById(R.id.region_spinner);
         ListView listView = root.findViewById(R.id.dss_list_view);
 
+        //获取数据
         List<DssData> dssDataList = dashboardViewModel.getLatestDataList().getValue();
+
+
+        //绘图
         DashboardAdapter adapter = new DashboardAdapter(getContext(),getParentFragmentManager(),dashboardViewModel);
         listView.setAdapter(adapter);
 
+
+        //绑定时间
         dashboardViewModel.getLatestDataList().observe(getViewLifecycleOwner(), new Observer<List<DssData>>() {
             @Override
             public void onChanged(List<DssData> dssData) {
@@ -74,20 +69,12 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+
+
+
+        //刷新数据
         dashboardViewModel.refresh();
         return root;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        timer.scheduleAtFixedRate(dataTask,1000,5000);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        timer.cancel();
     }
 
 }

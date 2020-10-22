@@ -56,6 +56,8 @@ public class EditDssConfigDialog extends DialogFragment {
         EditText ipText = root.findViewById(R.id.dss_ip);
         EditText dssText = root.findViewById(R.id.dss_dss);
         EditText groupText = root.findViewById(R.id.dss_group);
+        EditText upperText = root.findViewById(R.id.dss_upper);
+        EditText lowerText = root.findViewById(R.id.dss_lower);
         Spinner resSpinner = root.findViewById(R.id.dss_res);
         Spinner regionSpinner = root.findViewById(R.id.dss_region);
 
@@ -77,8 +79,8 @@ public class EditDssConfigDialog extends DialogFragment {
         ipText.setText(dssConfig.getIp());
         dssText.setText(dssConfig.getDss());
         groupText.setText(dssConfig.getGroup());
-
-
+        upperText.setText(dssConfig.getUpper());
+        lowerText.setText(dssConfig.getLower());
 
 
         builder.setView(root).setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -88,6 +90,8 @@ public class EditDssConfigDialog extends DialogFragment {
                 dssConfig.setIp(ipText.getText().toString());
                 dssConfig.setDss(dssText.getText().toString());
                 dssConfig.setGroup(groupText.getText().toString());
+                dssConfig.setUpper(upperText.getText().toString());
+                dssConfig.setLower(lowerText.getText().toString());
                 dssConfig.setRegion(regionConfigViewModel.getRegionList().getValue().get(regionSpinner.getSelectedItemPosition()));
                 dssConfig.setResType(resourceConfigViewModel.getResTypeList().getValue().get(resSpinner.getSelectedItemPosition()));
                 if(dssRepository.updateDssConfig(dssConfig)) {

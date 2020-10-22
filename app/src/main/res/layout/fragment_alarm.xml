@@ -5,26 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.config.dss.DssConfigFragment">
-
-    <TextView
-        android:id="@+id/back_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    tools:context=".ui.alarm.AlarmFragment">
+    <Spinner
+        android:id="@+id/res_spinner"
+        android:layout_width="128dp"
+        android:layout_height="32dp"
         android:layout_margin="32dp"
-        android:text="《返回"
+        android:background="@color/colorLight"
         android:textColor="@color/colorLight"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <Spinner
+        android:id="@+id/region_spinner"
+        android:layout_width="128dp"
+        android:layout_height="32dp"
+        android:layout_margin="32dp"
+        android:background="@color/colorLight"
+        android:textColor="@color/colorLight"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/res_spinner"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/refresh_button"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_margin="32dp"
         android:background="@color/colorPrimary"
-        android:text="添加"
+        android:text="刷新"
         android:textColor="@color/colorLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,9 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="2sp"
                 android:layout_marginVertical="8sp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:text="序号"
+                android:text="警报类型"
                 android:textAlignment="center"
                 android:textColor="@color/colorLight"
                 android:textSize="@dimen/config_region_text_size" />
@@ -58,19 +66,7 @@
                 android:layout_marginVertical="8sp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="数据名称"
-                android:textAlignment="center"
-                android:textColor="@color/colorLight"
-                android:textSize="@dimen/config_region_text_size" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2sp"
-                android:layout_marginVertical="8sp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="所属区域"
+                android:text="当前值"
                 android:textAlignment="center"
                 android:textColor="@color/colorLight"
                 android:textSize="@dimen/config_region_text_size" />
@@ -81,11 +77,10 @@
                 android:layout_marginVertical="8sp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="url"
+                android:text="位置"
                 android:textAlignment="center"
                 android:textColor="@color/colorLight"
                 android:textSize="@dimen/config_region_text_size" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -93,54 +88,16 @@
                 android:layout_marginVertical="8sp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="上限"
+                android:text="时间"
                 android:textAlignment="center"
                 android:textColor="@color/colorLight"
                 android:textSize="@dimen/config_region_text_size" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="2sp"
                 android:layout_marginVertical="8sp"
                 android:layout_weight="2"
-                android:gravity="center"
-                android:text="下限"
-                android:textAlignment="center"
-                android:textColor="@color/colorLight"
-                android:textSize="@dimen/config_region_text_size" />
-
-            <TextView
-                android:id="@+id/dss_res"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2sp"
-                android:layout_marginVertical="8sp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="资源类型"
-                android:textAlignment="center"
-                android:textColor="@color/colorLight"
-                android:textSize="@dimen/config_region_text_size" />
-
-            <TextView
-                android:id="@+id/dss_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2sp"
-                android:layout_marginVertical="8sp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="创建时间"
-                android:textAlignment="center"
-                android:textColor="@color/colorLight"
-                android:textSize="@dimen/config_region_text_size" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4sp"
-                android:layout_marginVertical="8sp"
-                android:layout_weight="4"
                 android:gravity="center"
                 android:text="操作"
                 android:textAlignment="center"
@@ -148,12 +105,12 @@
                 android:textSize="@dimen/config_region_text_size" />
         </LinearLayout>
         <ListView
-            android:id="@+id/config_list_view"
+            android:id="@+id/alarm_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="32dp"
             android:background="@color/colorPrimary"
-            tools:listitem="@layout/config_item_dss" />
+            tools:listitem="@layout/alarm_item" />
     </androidx.cardview.widget.CardView>
 
 

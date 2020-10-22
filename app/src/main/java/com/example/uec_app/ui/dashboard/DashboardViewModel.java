@@ -12,6 +12,7 @@ import com.example.uec_app.model.DssData;
 import com.example.uec_app.repository.DssRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped;
 public class DashboardViewModel extends ViewModel {
 
     private MutableLiveData<List<DssData>> latestDataList;
+    private MutableLiveData<DssConfig> currentDss;
     private DssRepository dssRepository;
 
     @Inject
@@ -32,6 +34,7 @@ public class DashboardViewModel extends ViewModel {
         this.dssRepository = dssRepository;
         latestDataList = new MutableLiveData<>();
         latestDataList.setValue(new ArrayList<>());
+        currentDss = new MutableLiveData<>();
     }
 
     public LiveData<List<DssData>> getLatestDataList() {
@@ -40,6 +43,14 @@ public class DashboardViewModel extends ViewModel {
 
     public void setLatestDataList(List<DssData> dssDataList) {
         this.latestDataList.setValue(dssDataList);
+    }
+
+    public MutableLiveData<DssConfig> getCurrentDss() {
+        return currentDss;
+    }
+
+    public void setCurrentDss(DssConfig currentDss) {
+        this.currentDss.setValue(currentDss);
     }
 
     public boolean removeDssData(int id){

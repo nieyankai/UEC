@@ -17,13 +17,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp">
         <com.example.uec_app.component.DataCard
-            android:id="@+id/temp_card"
+            android:id="@+id/card0"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_margin="4dp"/>
         <com.example.uec_app.component.DataCard
-            android:id="@+id/power_card"
+            android:id="@+id/card1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -37,13 +37,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp">
         <com.example.uec_app.component.DataCard
-            android:id="@+id/voltage_card"
+            android:id="@+id/card2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_margin="4dp"/>
         <com.example.uec_app.component.DataCard
-            android:id="@+id/current_card"
+            android:id="@+id/card3"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -51,8 +51,55 @@
 
     </LinearLayout>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/colorPrimary"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/region_text_size"
+        android:paddingLeft="72dp"
+        android:textColor="@color/colorLight"
+        android:text="报警统计"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/alarm_all"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#EAD51C"
+            android:textSize="@dimen/region_text_size"
+            android:text="报警总数"
+            />
+        <TextView
+            android:id="@+id/alarm_wait"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWarning"
+            android:textSize="@dimen/region_text_size"
+            android:textAlignment="center"
+            android:text="待解决"
+            />
+        <TextView
+            android:id="@+id/alarm_resolved"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/region_text_size"
+            android:layout_height="wrap_content"
+            android:textColor="#05EC1C"
+            android:textAlignment="center"
+            android:text="已解决"
+            />
+    </LinearLayout>
+
     <Button
         android:id="@+id/refresh_button"
+        android:layout_marginTop="@dimen/region_text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="刷新"/>

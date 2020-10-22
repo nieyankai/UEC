@@ -14,39 +14,87 @@ public class Alarm {
     @DatabaseField(generatedId = true)
     private long id;
 
+    @DatabaseField(columnName = "value",dataType = DataType.STRING)
+    private String value;
+
     @DatabaseField(columnName = "type",dataType = DataType.STRING)
     private String type;
 
-    @DatabaseField(columnName = "content",dataType = DataType.STRING)
-    private String content;
+    @DatabaseField(columnName = "region",dataType = DataType.STRING)
+    private String region;
 
-    @DatabaseField(columnName = "status",dataType = DataType.STRING)
-    private String status;
+    @DatabaseField(columnName = "dss",dataType = DataType.STRING)
+    private String dss;
 
     @DatabaseField(columnName = "time",dataType = DataType.LONG)
     private long time;
 
+    @DatabaseField(columnName = "resolved",dataType = DataType.STRING)
+    private String resolved;
+
     public Alarm() {
     }
 
-    public Alarm(String type, String content, String status, long time) {
+
+    public Alarm(long id, String value, String type, String region, String dss, long time, String resolved) {
+        this.id = id;
+        this.value = value;
         this.type = type;
-        this.content = content;
-        this.status = status;
+        this.region = region;
+        this.dss = dss;
         this.time = time;
+        this.resolved = resolved;
+    }
+
+    public Alarm(String value, String type, String region, String dss, long time) {
+        this.value = value;
+        this.type = type;
+        this.region = region;
+        this.dss = dss;
+        this.time = time;
+        this.resolved = "解除";
+    }
+
+    public Alarm(String value, String type, String region, String dss) {
+        this.value = value;
+        this.type = type;
+        this.region = region;
+        this.dss = dss;
+        this.time = System.currentTimeMillis();
+        this.resolved = "解除";
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 
-    public Alarm(long id, String type, String content, String status, long time) {
-        this.id = id;
-        this.type = type;
-        this.content = content;
-        this.status = status;
-        this.time = time;
+    public String getRegion() {
+        return region;
     }
 
-    public Alarm(long id) {
-        this.id = id;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getDss() {
+        return dss;
+    }
+
+    public void setDss(String dss) {
+        this.dss = dss;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getType() {
@@ -57,22 +105,6 @@ public class Alarm {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public long getTime() {
         return time;
     }
@@ -81,14 +113,25 @@ public class Alarm {
         this.time = time;
     }
 
+
+    public String getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(String resolved) {
+        this.resolved = resolved;
+    }
+
     @Override
     public String toString() {
         return "Alarm{" +
                 "id=" + id +
+                ", value='" + value + '\'' +
                 ", type='" + type + '\'' +
-                ", content='" + content + '\'' +
-                ", status='" + status + '\'' +
+                ", region='" + region + '\'' +
+                ", dss='" + dss + '\'' +
                 ", time=" + time +
+                ", resolved='" + resolved + '\'' +
                 '}';
     }
 

@@ -1,6 +1,7 @@
 package com.example.uec_app.repository;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.uec_app.coap.COAPClient;
@@ -13,9 +14,12 @@ import com.example.uec_app.model.ResType;
 import com.example.uec_app.model.UserInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -25,7 +29,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 @Singleton
 public class DssRepository {
 
-    Context context;
+
     private TDao<DssData> dssDataTDao;
     private TDao<DssConfig> dssConfigTDao;
     private TDao<UserInfo> userInfoTDao;
@@ -37,7 +41,7 @@ public class DssRepository {
 
     @Inject
     public DssRepository(@ApplicationContext Context ctx) {
-        this.context = ctx;
+
         this.dssDataTDao = new TDao<DssData>(ctx,DssData.class);
         this.dssConfigTDao = new TDao<DssConfig>(ctx,DssConfig.class);
         this.userInfoTDao = new TDao<UserInfo>(ctx,UserInfo.class);
@@ -78,6 +82,25 @@ public class DssRepository {
         return unit;
     }
 
+    private void checkData(DssData dssData, DssConfig dssConfig){
+        if (dssConfig.getUpper() == null ||dssConfig.getLower() == null || dssConfig.getUpper().isEmpty() || dssConfig.getLower().isEmpty())
+            return;
+        float upper = Float.parseFloat(dssConfig.getUpper());
+        float lower = Float.parseFloat(dssConfig.getLower());
+        float value = Float.parseFloat(dssData.getValue());
+        if (value<=upper && value>=lower)
+            return;
+        if (value>upper){
+            Alarm alarm = new Alarm(dssData.getValue(),"超上限预警",dssConfig.getRegion().getName(),dssConfig.getName());
+            alarmTDao.insert(alarm);
+            return;
+        }
+        if (value<lower){
+            Alarm alarm = new Alarm(dssData.getValue(),"超下限预警",dssConfig.getRegion().getName(),dssConfig.getName());
+            alarmTDao.insert(alarm);
+        }
+    }
+
     public void clearDB(){
         dssDataTDao.deleteAll();
         dssConfigTDao.deleteAll();
@@ -92,7 +115,7 @@ public class DssRepository {
         if (dataCache.containsKey(dssConfig.getId()))
             return (DssData) dataCache.get(dssConfig.getId());
 
-        DssData dataDB = dssDataTDao.queryLatest("config_id",dssConfig.getId());
+        DssData dataDB = dssDataTDao.queryLatest("dss_config",dssConfig);
         if (dataDB != null){
             return dataDB;
         }
@@ -118,6 +141,12 @@ public class DssRepository {
         List<DssData> list = dssDataTDao.queryForN("dss_config",dssConfig,N);
         if (list==null || list.isEmpty())
             return new ArrayList<>();
+        list.sort(new Comparator<DssData>() {
+            @Override
+            public int compare(DssData o1, DssData o2) {
+                return (int) (o1.getTime()-o2.getTime());
+            }
+        });
         return list;
     }
 
@@ -135,8 +164,8 @@ public class DssRepository {
         return res;
     }
 
-    public List<DssData> getTypeActivetData(String type){
-        List<DssConfig> configs = dssConfigTDao.queryByColumn("type",type);
+    public List<DssData> getTypeActivetData(ResType type){
+        List<DssConfig> configs = dssConfigTDao.queryByColumn("res_type",type);
         if (configs==null || configs.isEmpty())
             return new ArrayList<>();
         List<DssData> res = new ArrayList<>();
@@ -188,6 +217,7 @@ public class DssRepository {
         if(dssDataTDao.insert(data)<=0)
             return false;
         dataCache.put(dssConfig.getId(),data);
+        checkData(data,dssConfig);
         return true;
     }
 
@@ -231,11 +261,40 @@ public class DssRepository {
         return userInfoTDao.insertOrUpdate(userInfo)>0;
     }
 
+    public boolean checkUser(UserInfo userInfo) {
+        Map<String ,Object> map = new HashMap<>();
+        map.put("name",userInfo.getName());
+        map.put("password",userInfo.getPassword());
+        return userInfoTDao.queryForFieldValues(map).size()>0;
+    }
+
     //Alarm
     public List<Alarm> getAlarmList(long N){
         return alarmTDao.queryForN(N);
     }
 
+    public boolean addAlarm(Alarm alarm){
+        return alarmTDao.insert(alarm)>0;
+    }
+
+    public boolean removeAlarm(Alarm alarm){
+        return alarmTDao.delete(alarm)>0;
+    }
+
+    public boolean resolveAlarm(Alarm alarm){
+        alarm.setResolved("已解除");
+        return alarmTDao.update(alarm)>0;
+    }
+
+    public long countAlarmAll(){
+        return alarmTDao.count();
+    }
+    public long countAlarmWait(){
+        return alarmTDao.countByCollumn("resolved","解除");
+    }
+    public long countAlarmResolved(){
+        return alarmTDao.countByCollumn("resolved","已解除");
+    }
     //ResType
     public List<ResType> getResTypeList(){
         return resTypeTDao.queryAll();
@@ -263,4 +322,15 @@ public class DssRepository {
         return regionTDao.delete(region)>0;
     }
 
+
+    //control
+    public boolean control(DssConfig dssConfig, String type, String value, int time) {
+        String url = getCoapUrl(dssConfig);
+        String data = value == "开" ? "1":"0";
+        if (type == "立即控制"){
+            String res = sendCoapRequest(url,data,"put");
+            Log.d("result", "control() returned: " + res);
+        }
+        return data.equals(getLatestData(dssConfig).getValue());
+    }
 }

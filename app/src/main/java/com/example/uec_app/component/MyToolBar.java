@@ -3,6 +3,7 @@ package com.example.uec_app.component;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,8 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.uec_app.R;
+import com.example.uec_app.ui.config.region.AddRegionDialog;
+import com.example.uec_app.ui.login.LoginDialog;
 
 import java.util.List;
 
@@ -43,6 +49,7 @@ public class MyToolBar extends Toolbar {
         timeText = findViewById(R.id.time);
         regionSpinner = findViewById(R.id.region);
         loginButton = findViewById(R.id.login_button);
+
     }
 
     public void setTimeText(String text){

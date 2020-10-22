@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static String dbname = "next.db";
-    private static int version = 6;
+    private static int version = 10;
     private static DBHelper instance;
 
     public DBHelper(Context context) {

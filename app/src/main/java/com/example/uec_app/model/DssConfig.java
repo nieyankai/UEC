@@ -32,8 +32,14 @@ public class DssConfig {
     @DatabaseField(columnName = "dss",dataType = DataType.STRING)
     private String dss;
 
-    @DatabaseField(columnName = "res_type_id",foreign = true,canBeNull = true,foreignAutoRefresh = true)
+    @DatabaseField(columnName = "res_type",foreign = true,canBeNull = true,foreignAutoRefresh = true)
     private ResType resType;
+
+    @DatabaseField(columnName = "upper",dataType = DataType.STRING,canBeNull = true)
+    private String upper;
+    @DatabaseField(columnName = "lower",dataType = DataType.STRING,canBeNull = true)
+    private String lower;
+
 
     @DatabaseField(columnName = "time",dataType = DataType.LONG)
     private long time;
@@ -70,6 +76,30 @@ public class DssConfig {
         this.dss = dss;
         this.resType = resType;
         this.time = System.currentTimeMillis();
+    }
+
+    public DssConfig(String name, Region region, String ip, String group, String dss, ResType resType, String upper, String lower) {
+        this.name = name;
+        this.region = region;
+        this.ip = ip;
+        this.group = group;
+        this.dss = dss;
+        this.resType = resType;
+        this.upper = upper;
+        this.lower = lower;
+        this.time = System.currentTimeMillis();
+    }
+
+    public DssConfig(String name, Region region, String ip, String group, String dss, ResType resType, long time, String upper, String lower) {
+        this.name = name;
+        this.region = region;
+        this.ip = ip;
+        this.group = group;
+        this.dss = dss;
+        this.resType = resType;
+        this.upper = upper;
+        this.lower = lower;
+        this.time = time;
     }
 
     public long getId() {
@@ -128,6 +158,22 @@ public class DssConfig {
         this.resType = resType;
     }
 
+    public String getUpper() {
+        return upper;
+    }
+
+    public void setUpper(String upper) {
+        this.upper = upper;
+    }
+
+    public String getLower() {
+        return lower;
+    }
+
+    public void setLower(String lower) {
+        this.lower = lower;
+    }
+
     public long getTime() {
         return time;
     }
@@ -146,10 +192,11 @@ public class DssConfig {
                 ", group='" + group + '\'' +
                 ", dss='" + dss + '\'' +
                 ", resType=" + resType +
+                ", upper='" + upper + '\'' +
+                ", lower='" + lower + '\'' +
                 ", time=" + time +
                 '}';
     }
-
 
 
     public String getTimeString(){

@@ -37,15 +37,14 @@ public class COAPClient {
 
         //put 请求
         if (action.equals("put")) {
-            response = client.put(data,1);
+            response = client.put(data,TEXT_PLAIN);
+ //           response = client.put(data,1);
         }else if (action.equals("get")) {
             response = client.get();
         }else if(action.equals("post")){
             response = client.post(data, MediaTypeRegistry.APPLICATION_JSON);
         }else if(action.equals("delete")){
             response = client.delete();
-        }else if(action.equals("change")){
-            response = client.put(data,TEXT_PLAIN);
         }
 
         if (response != null) {

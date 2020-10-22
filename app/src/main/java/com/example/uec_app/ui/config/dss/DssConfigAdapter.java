@@ -33,9 +33,9 @@ public class DssConfigAdapter extends BaseAdapter{
         public TextView dss_id;
         public TextView dss_name;
         public TextView dss_region;
-        public TextView dss_ip;
-        public TextView group;
-        public TextView dss;
+        public TextView dss_url;
+        public TextView dss_upper;
+        public TextView dss_lower;
         public TextView dss_res;
         public TextView dss_time;
         public Button edit_button;
@@ -85,9 +85,9 @@ public class DssConfigAdapter extends BaseAdapter{
             listItemView.dss_id = (TextView) convertView.findViewById(R.id.dss_id);
             listItemView.dss_name = (TextView) convertView.findViewById(R.id.dss_name);
             listItemView.dss_region = (TextView) convertView.findViewById(R.id.dss_region);
-            listItemView.dss_ip = (TextView) convertView.findViewById(R.id.ip);
-            listItemView.dss = (TextView) convertView.findViewById(R.id.dss);
-            listItemView.group = (TextView) convertView.findViewById(R.id.group);
+            listItemView.dss_url = (TextView) convertView.findViewById(R.id.dss_url);
+            listItemView.dss_upper = (TextView) convertView.findViewById(R.id.dss_upper);
+            listItemView.dss_lower = (TextView) convertView.findViewById(R.id.dss_lower);
             listItemView.dss_time = (TextView) convertView.findViewById(R.id.dss_time);
             listItemView.dss_res = (TextView) convertView.findViewById(R.id.dss_res);
             listItemView.edit_button = (Button) convertView.findViewById(R.id.edit_button);
@@ -99,9 +99,9 @@ public class DssConfigAdapter extends BaseAdapter{
         DssConfig config = viewModel.getDssConfigList().getValue().get(position);
         listItemView.dss_id.setText(String.valueOf(position));
         listItemView.dss_name.setText(config.getName());
-        listItemView.dss_ip.setText(config.getIp());
-        listItemView.dss.setText(config.getDss());
-        listItemView.group.setText(config.getGroup());
+        listItemView.dss_url.setText("coap://" + config.getIp() + ":"+ 5683 + "/dss/" + config.getGroup() + "/" + config.getDss());
+        listItemView.dss_upper.setText(config.getUpper());
+        listItemView.dss_lower.setText(config.getLower());
         listItemView.dss_region.setText(config.getRegion().getName());
         listItemView.dss_res.setText(config.getResType().getName());
         listItemView.dss_time.setText(config.getTimeString());

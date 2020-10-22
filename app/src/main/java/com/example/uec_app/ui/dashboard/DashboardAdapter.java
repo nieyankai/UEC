@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.Navigation;
 
 import com.example.uec_app.R;
 import com.example.uec_app.model.DssConfig;
@@ -110,8 +111,8 @@ public class DashboardAdapter extends BaseAdapter{
         @Override
         public void onClick(View v) {
             //Todo navigation to historydata
-            DialogFragment dialogFragment = new EditDssConfigDialog((DssConfig) getItem(position));
-            dialogFragment.show(fragmentManager,"edit_dss_dialog");
+            viewModel.setCurrentDss(viewModel.getLatestDataList().getValue().get(position).getDssConfig());
+            Navigation.findNavController(v).navigate(R.id.action_dashboardFragment_to_dataHistoryFragment);
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:background="@drawable/config_item_border"
+    android:background="@drawable/border_light"
     android:descendantFocusability="afterDescendants"
     android:orientation="horizontal">
     <TextView

@@ -54,6 +54,8 @@ public class AddDssConfigDialog extends DialogFragment {
         EditText ipText = root.findViewById(R.id.dss_ip);
         EditText dssText = root.findViewById(R.id.dss_dss);
         EditText groupText = root.findViewById(R.id.dss_group);
+        EditText upperText = root.findViewById(R.id.dss_upper);
+        EditText lowerText = root.findViewById(R.id.dss_lower);
         Spinner resSpinner = root.findViewById(R.id.dss_res);
         Spinner regionSpinner = root.findViewById(R.id.dss_region);
 
@@ -73,7 +75,7 @@ public class AddDssConfigDialog extends DialogFragment {
         builder.setView(root).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(dssRepository.addDssConfig(new DssConfig(nameText.getText().toString(),regionConfigViewModel.getRegionList().getValue().get(regionSpinner.getSelectedItemPosition()),ipText.getText().toString(),groupText.getText().toString(),dssText.getText().toString(),resourceConfigViewModel.getResTypeList().getValue().get(resSpinner.getSelectedItemPosition())))) {
+                if(dssRepository.addDssConfig(new DssConfig(nameText.getText().toString(),regionConfigViewModel.getRegionList().getValue().get(regionSpinner.getSelectedItemPosition()),ipText.getText().toString(),groupText.getText().toString(),dssText.getText().toString(),resourceConfigViewModel.getResTypeList().getValue().get(resSpinner.getSelectedItemPosition()),upperText.getText().toString(),lowerText.getText().toString()))) {
                     Toast.makeText(getContext(), "添加成功", Toast.LENGTH_SHORT).show();
                     dssConfigViewModel.refresh();
                 }

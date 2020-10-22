@@ -10,6 +10,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -224,6 +225,17 @@ public class TDao<T> {
         return t;
     }
 
+    public List<T> queryForFieldValues(Map<String,Object> map){
+        List<T> tList = new ArrayList<>();
+        try {
+            tList.addAll(mDao.queryForFieldValues(map));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tList;
+
+    }
+
 
 
 
@@ -240,9 +252,10 @@ public class TDao<T> {
     public long countByCollumn(String collumn, Object value){
         long res = 0;
         try {
-            QueryBuilder builder = mDao.queryBuilder();
-            builder.where().eq(collumn,value);
-            res = mDao.countOf(builder.prepare());
+            List<T> list = mDao.queryForEq(collumn,value);
+            if (list == null)
+                return 0;
+            res = list.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
