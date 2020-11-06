@@ -20,7 +20,10 @@ import com.example.uec_app.R;
 import com.example.uec_app.component.MyToolBar;
 import com.example.uec_app.model.Region;
 import com.example.uec_app.repository.DssRepository;
+import com.example.uec_app.ui.alarm.AlarmViewModel;
 import com.example.uec_app.ui.config.region.RegionConfigViewModel;
+import com.example.uec_app.ui.dashboard.DashboardViewModel;
+import com.example.uec_app.ui.home.HomeViewModel;
 import com.example.uec_app.ui.login.LoginDialog;
 import com.example.uec_app.util.LogUtil;
 import com.example.uec_app.work.dataThread;
@@ -49,23 +52,46 @@ public class MainActivity extends AppCompatActivity {
     RegionConfigViewModel regionConfigViewModel;
     @Inject
     SharedViewModel sharedViewModel;
+    @Inject
+    AlarmViewModel alarmViewModel;
+    @Inject
+    HomeViewModel homeViewModel;
+    @Inject
+    DashboardViewModel dashboardViewModel;
 
     private MyToolBar mToobar;
     private Logger logger;
     private List<Map<String,Object>> regionList = new ArrayList<>();
     private Timer timer = new Timer();
-    private TimerTask timerTask = new TimerTask() {
+    private TimerTask timeTask = new TimerTask() {
         @Override
         public void run() {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     mToobar.setTimeText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
-                    regionConfigViewModel.refresh();
                 }
             });
         }
     };
+
+    private TimerTask dataTask = new TimerTask() {
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    regionConfigViewModel.refresh();
+                    alarmViewModel.refresh();
+                    homeViewModel.refresh();
+                    dashboardViewModel.refresh();
+                    sharedViewModel.refreshResTypeCount();
+                }
+            });
+        }
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //刷新数据
-        timer.scheduleAtFixedRate(timerTask,500,1000);
+        timer.scheduleAtFixedRate(timeTask,500,1000);
+        timer.scheduleAtFixedRate(dataTask,500,10000);
 
     }
 

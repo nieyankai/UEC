@@ -103,7 +103,6 @@ public class DssRepository {
 
     public void clearDB(){
         dssDataTDao.deleteAll();
-        dssConfigTDao.deleteAll();
         userInfoTDao.deleteAll();
         alarmTDao.deleteAll();
     }
@@ -181,7 +180,6 @@ public class DssRepository {
 
     public List<DssData> getAllLatestData(){
         List<DssConfig> configs = dssConfigTDao.queryAll();
-        List<DssData> datas = dssDataTDao.queryAll();
         if (configs==null || configs.isEmpty())
             return new ArrayList<>();
         List<DssData> res = new ArrayList<>();
@@ -227,7 +225,7 @@ public class DssRepository {
     }
 
     public long getTypeConfigCount(ResType type){
-        return dssConfigTDao.countByCollumn("type",type);
+        return dssConfigTDao.countByCollumn("res_type",type);
     }
 
     public boolean removeDssConfig(DssConfig dssConfig){
@@ -332,5 +330,9 @@ public class DssRepository {
             Log.d("result", "control() returned: " + res);
         }
         return data.equals(getLatestData(dssConfig).getValue());
+    }
+
+    public int getRetryTimes() {
+        return 3;
     }
 }

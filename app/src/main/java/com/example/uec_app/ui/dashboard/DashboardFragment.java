@@ -73,8 +73,10 @@ public class DashboardFragment extends Fragment {
 
 
         //刷新数据
-        dashboardViewModel.refresh();
+
         return root;
     }
+
+
 
 }

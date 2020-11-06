@@ -70,12 +70,12 @@ public class HomeFragment extends Fragment {
         //获取数据
 
         //绘图
-
         alarmAllText.setText(alarmViewModel.getAlarmAll().getValue().toString());
         alarmWaitText.setText(alarmViewModel.getAlarmWait().getValue().toString());
         alarmResolvedText.setText(alarmViewModel.getAlarmResolved().getValue().toString());
+
+        ListIterator<DataCard> cardListIterator = dataCards.listIterator();
         for (Map.Entry<String,List<DssData>> entry: homeViewModel.getDataListMap().getValue().entrySet()) {
-            ListIterator<DataCard> cardListIterator = dataCards.listIterator();
             if (!cardListIterator.hasNext())
                 break;
             DataCard dataCard = cardListIterator.next();
@@ -97,8 +97,8 @@ public class HomeFragment extends Fragment {
         homeViewModel.getDataListMap().observe(getViewLifecycleOwner(), new Observer<Map<String, List<DssData>>>() {
             @Override
             public void onChanged(Map<String, List<DssData>> stringListMap) {
+                ListIterator<DataCard> cardListIterator = dataCards.listIterator();
                 for (Map.Entry<String,List<DssData>> entry: stringListMap.entrySet()) {
-                    ListIterator<DataCard> cardListIterator = dataCards.listIterator();
                     if (!cardListIterator.hasNext())
                         break;
                     DataCard dataCard = cardListIterator.next();
@@ -155,8 +155,10 @@ public class HomeFragment extends Fragment {
         });
 
 
-        alarmViewModel.refresh();
-        homeViewModel.refresh();
+
         return root;
     }
+
+
+
 }

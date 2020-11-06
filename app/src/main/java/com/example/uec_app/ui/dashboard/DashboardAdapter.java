@@ -93,7 +93,7 @@ public class DashboardAdapter extends BaseAdapter{
         DssData dssData = viewModel.getLatestDataList().getValue().get(position);
         listItemView.dss_id.setText(String.valueOf(position));
         listItemView.dss_name.setText(dssData.getDssConfig().getName());
-        listItemView.dss_status.setText("正常");
+        listItemView.dss_status.setText((System.currentTimeMillis()-dssData.getTime()<60000)?"正常":"离线");
         listItemView.dss_region.setText(dssData.getDssConfig().getRegion().getName());
         listItemView.dss_value.setText(dssData.getValue());
         listItemView.dss_time.setText(dssData.getTimeString());

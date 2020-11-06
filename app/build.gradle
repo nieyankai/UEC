@@ -29,6 +29,11 @@ android {
         exclude 'notice.html'
         exclude 'edl-v10.html'
         exclude 'about.html'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -100,5 +105,14 @@ dependencies {
     implementation files('libs/gson-2.7.jar')
 
 
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+
+
+    //Spring Rest template
+    implementation 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.6.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 }

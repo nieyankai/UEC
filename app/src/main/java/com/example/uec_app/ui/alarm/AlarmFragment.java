@@ -65,7 +65,6 @@ public class AlarmFragment extends Fragment {
         });
 
         //刷新数据
-        alarmViewModel.refresh();
         return root;
     }
 
